@@ -17,11 +17,11 @@ public abstract class GenericIceCream {
 	public String getToppings() {
 		return toppings;
 	}
-
+/*
 	public void setToppings(String toppings) {
 		this.toppings = toppings;
 	}
-
+*/
 	public double getPrice() {
 		return price;
 	}
@@ -30,12 +30,14 @@ public abstract class GenericIceCream {
 		this.price = price;
 	}
 
+	public String getFlavors() {
+		return flavors;
+	}
+
 	protected void createIceCream(){
 		System.out.println("El helado de "+flavors+" se prepara con el siguiente ingrediente:" + ingredientes
 				+ (toppings != null && !toppings.isEmpty() ? (", adicionales: " + toppings)
 				: " sin adicional"));
 	}
-
-
 
 }
