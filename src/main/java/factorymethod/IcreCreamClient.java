@@ -1,8 +1,12 @@
 package factorymethod;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.*;
 
+import frames.PanelBody;
+
+import javax.swing.*;
 import factorymethod.aditional.AdditionalMachine;
 import factorymethod.aditional.GenericAdditional;
 import factorymethod.factory.AdditionalFactory;
@@ -16,8 +20,8 @@ import util.ObjectMapperJSON;
 
 public class IcreCreamClient {
 
-    public static void main(String[] args) throws IOException {
-
+    public static void main(String[] args) {
+		/*System.out.println("FRABRICA DE HELADOS");
 		System.out.println("FRABRICA DE HELADOS");
 		System.out.println("_________________________");
 		System.out.println("Seleccione sabor del helado ");
@@ -50,6 +54,15 @@ public class IcreCreamClient {
 		}
 		IcreCreamClient.saveIceCreams(iceCreams);
 		System.out.println("\nThank You ");
+		System.out.println("\nThank You ");*/
+
+		JFrame frame = new JFrame("FABRICA DE HELADOS");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		PanelBody body = new PanelBody(1024, 780);
+		frame.add(body.getBody(), BorderLayout.CENTER);
+		frame.pack();
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
 
 	}
 
