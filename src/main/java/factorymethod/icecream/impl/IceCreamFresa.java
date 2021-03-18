@@ -22,4 +22,9 @@ public class IceCreamFresa extends GenericIceCream implements IceCreamMachine {
 		
 	}
 
+	@Override
+	public String getImagePath() {
+		String path = "./icons/fresa.png";
+		return path;
+	}
 }

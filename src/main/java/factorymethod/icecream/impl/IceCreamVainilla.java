@@ -20,4 +20,10 @@ public class IceCreamVainilla extends GenericIceCream implements IceCreamMachine
 
 	}
 
+
+	@Override
+	public String getImagePath() {
+		String path = "./icons/vainilla.png";
+		return path;
+	}
 }

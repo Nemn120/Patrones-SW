@@ -1,14 +1,15 @@
 package factorymethod;
 
-import java.util.Scanner;
+import java.awt.*;
 
-import factorymethod.factory.IceCreamFactory;
-import factorymethod.icecream.IceCreamMachine;
+import frames.PanelBody;
+
+import javax.swing.*;
 
 public class IcreCreamClient {
 
     public static void main(String[] args) {
-		System.out.println("FRABRICA DE HELADOS");
+		/*System.out.println("FRABRICA DE HELADOS");
 		System.out.println("_________________________");
 		System.out.println("Seleccione sabor del helado ");
 		System.out.println("1-chocolate, 2- vainilla, 3- fresa, 4- exit");
@@ -30,7 +31,15 @@ public class IcreCreamClient {
 				topping = scanner.nextLine();
 			}
 		}
-		System.out.println("\nThank You ");
+		System.out.println("\nThank You ");*/
+
+		JFrame frame = new JFrame("FABRICA DE HELADOS");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		PanelBody body = new PanelBody(1024, 780);
+		frame.add(body.getBody(), BorderLayout.CENTER);
+		frame.pack();
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
 
 	}
 
