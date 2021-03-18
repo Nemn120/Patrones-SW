@@ -1,10 +1,13 @@
 package factorymethod.icecream;
 
+import factorymethod.aditional.GenericAdditional;
+
 public abstract class GenericIceCream {
-	private String ingredientes;
-	protected String toppings;
-	private double price;
 	protected String flavors;
+	protected double price;
+	protected String ingredientes;
+	protected String toppings;
+	protected GenericAdditional additional;
 
 	public String getIngredientes() {
 		return ingredientes;
@@ -34,10 +37,22 @@ public abstract class GenericIceCream {
 		return flavors;
 	}
 
+	public GenericAdditional getAdditional() {
+		return additional;
+	}
+
+	public void setAdditional(GenericAdditional additional) {
+		this.additional = additional;
+	}
+
 	protected void createIceCream(){
 		System.out.println("El helado de "+flavors+" se prepara con el siguiente ingrediente:" + ingredientes
 				+ (toppings != null && !toppings.isEmpty() ? (", adicionales: " + toppings)
 				: " sin adicional"));
 	}
+
+
+
+//	public abstract String savePath();
 
 }

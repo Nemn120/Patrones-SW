@@ -1,0 +1,22 @@
+{
+  "id": "247eaf99-65fc-47f1-a941-5f292b116aff",
+  "iceCreamList": [
+    {
+      "flavors": "Vainilla",
+      "price": 2.5,
+      "ingredientes": "leche entera, almidón de maíz + 2 cucharadas de leche, extracto de vainilla y azúcar",
+      "toppings": "15",
+      "additional": {
+        "name": "Fresa",
+        "price": 1.6854093514853996
+      }
+    },
+    {
+      "flavors": "Vainilla",
+      "price": 2.5,
+      "ingredientes": "leche entera, almidón de maíz + 2 cucharadas de leche, extracto de vainilla y azúcar",
+      "toppings": "2",
+      "additional": null
+    }
+  ]
+}

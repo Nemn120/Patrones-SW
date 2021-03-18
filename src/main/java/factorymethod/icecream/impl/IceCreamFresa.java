@@ -9,6 +9,7 @@ public class IceCreamFresa extends GenericIceCream implements IceCreamMachine {
 	public IceCreamFresa() {
 		this.setIngredientes("crema batida espesa, leche condensada azucarada y extracto de fresa");
 		this.flavors = "Fresa";
+		this.price = 2.5;
 	}
 	
 	@Override
@@ -21,5 +22,4 @@ public class IceCreamFresa extends GenericIceCream implements IceCreamMachine {
 		this.toppings = toppings;
 		
 	}
-
 }

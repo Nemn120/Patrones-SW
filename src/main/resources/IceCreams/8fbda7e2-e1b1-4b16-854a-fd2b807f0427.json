@@ -1,0 +1,23 @@
+{
+  "id": "8fbda7e2-e1b1-4b16-854a-fd2b807f0427",
+  "iceCreamList": [
+    {
+      "ingredientes": "leche entera, almidón de maíz + 2 cucharadas de leche, extracto de vainilla y azúcar",
+      "toppings": "126",
+      "price": 0.0,
+      "flavors": "Vainilla"
+    },
+    {
+      "ingredientes": "crema batida espesa, leche condensada azucarada y extracto de fresa",
+      "toppings": "12",
+      "price": 0.0,
+      "flavors": "Fresa"
+    },
+    {
+      "ingredientes": "crema batida espesa, leche condensada azucarada, cacao en polvo sin azúcar",
+      "toppings": "145",
+      "price": 0.0,
+      "flavors": "Chocolate"
+    }
+  ]
+}

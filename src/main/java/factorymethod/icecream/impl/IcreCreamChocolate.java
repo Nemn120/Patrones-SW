@@ -9,6 +9,7 @@ public class IcreCreamChocolate extends GenericIceCream implements IceCreamMachi
 	public IcreCreamChocolate() {
 		this.setIngredientes("crema batida espesa, leche condensada azucarada, cacao en polvo sin azúcar");
 		this.flavors = "Chocolate";
+		this.price = 2.5;
 	}
 	
 	@Override
