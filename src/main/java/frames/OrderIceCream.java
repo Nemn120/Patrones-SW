@@ -12,6 +12,7 @@ import factorymethod.icecream.IceCreams;
 import factorymethod.icecream.impl.IceCreamFresa;
 import factorymethod.icecream.impl.IceCreamVainilla;
 import factorymethod.icecream.impl.IcreCreamChocolate;
+import org.w3c.dom.css.RGBColor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,15 +44,19 @@ public class OrderIceCream extends JPanel {
     GenericAdditional genericAdditional;
     List<GenericAdditional> additionalChispasList;
     List<GenericAdditional> additionalFruits;
+    private boolean enableReporteButton;
 
     public OrderIceCream() {
         this.bodyOder = new JPanel();
         this.setLayout(new BorderLayout());
+        this.bodyOder.setBackground(new Color(201	, 126, 0));
         this.totalPrice = 0;
         this.message = "";
         textMessage = new JTextArea(5, 40);
+        this.textMessage.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
         this.listSelectAdditional1 = new ArrayList<>();
         this.enableButtonSelect = false;
+        this.enableReporteButton = false;
         this.chocolateButton = new JButton();
         this.vainillaCreamButton = new JButton();
         this.fresaCreamButton = new JButton();
@@ -68,7 +73,7 @@ public class OrderIceCream extends JPanel {
         this.getBodyOder().add(this.getTextMessage());
         this.generateOrder();
         this.selectAditional();
-        this.showTotalPrice();
+        //this.showTotalPrice();
         JFrame frameOrder = new JFrame("Crear Pedido");
         frameOrder.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frameOrder.add(this.getBodyOder(), BorderLayout.CENTER);
@@ -78,13 +83,33 @@ public class OrderIceCream extends JPanel {
         frameOrder.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     }
 
+    public void setImageBackground() {
+        ImageIcon image = new ImageIcon("./icons/adicionales/variado.png");
+        JLabel label = new JLabel("", image, JLabel.CENTER);
+        this.getBodyOder().add( label, BorderLayout.CENTER );
+    }
+
     public void createButtonIceCreams() {
         this.setChocolateButton(new JButton("Chocolate"));
+        this.setIconOnButton(this.getChocolateButton(), "chocolateIcon");
         this.setVainillaCreamButton(new JButton("Vainilla"));
+        this.setIconOnButton(this.getVainillaCreamButton(), "vainillaIcon");
         this.setFresaCreamButton(new JButton("Fresa"));
+        this.setIconOnButton(this.getFresaCreamButton(), "fresaIcon");
         this.getBodyOder().add(this.getChocolateButton());
         this.getBodyOder().add(this.getVainillaCreamButton());
         this.getBodyOder().add(this.getFresaCreamButton());
+    }
+
+    public void setIconOnButton(JButton button, String name) {
+        String path = ("./icons/").concat(name).concat(".png");
+        ImageIcon image = new ImageIcon(path);
+        Image img = image.getImage();
+        Image scaledImg = img.getScaledInstance(20, 30, Image.SCALE_SMOOTH);
+        image = new ImageIcon(scaledImg);
+        button.setIcon(image);
+        button.setHorizontalAlignment(SwingConstants.LEFT);;
+        this.getBodyOder().add(button);
     }
 
     public void selectIceCream() {
@@ -144,12 +169,14 @@ public class OrderIceCream extends JPanel {
     public void showAditionals() {
         this.setAdditonal1(new JPanel());
         this.getAdditonal1().setPreferredSize(new Dimension(500, 280));
-        this.getAdditonal1().setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
+        this.getAdditonal1().setBackground(new Color(201	, 126, 0));
+        this.getAdditonal1().setBorder(BorderFactory.createLineBorder(Color.WHITE));
         this.getBodyOder().add(this.getAdditonal1());
 
         this.setAdditonal2(new JPanel());
         this.getAdditonal2().setPreferredSize(new Dimension(500, 280));
-        this.getAdditonal2().setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
+        this.getAdditonal2().setBackground(new Color(201	, 126, 0));
+        this.getAdditonal2().setBorder(BorderFactory.createLineBorder(Color.WHITE));
         this.getBodyOder().add(this.getAdditonal2());
 
         this.setIconAndButtonAdditonals();
@@ -159,21 +186,21 @@ public class OrderIceCream extends JPanel {
         ImagesBody imagesBody = new ImagesBody();
         this.setListSelectAdditional1(new ArrayList<>());
         int totalAditionals = 6;
-        int index = 0;
         for (int i = 0; i < totalAditionals; i++) {
             JPanel panelImage = new JPanel();
             JButton selectAditional = new JButton("Elegir");
+            this.setIconOnButton(selectAditional, "selectIcon");
             this.getListSelectAdditional1().add(selectAditional);
             panelImage.add(this.getListSelectAdditional1().get(i));
+            panelImage.setBackground(new Color(201,126, 0));
             this.getListSelectAdditional1().get(i).setEnabled(false);
 
             if (i < 3) {
                 panelImage.add(imagesBody.setIconAditionals(String.valueOf(i + 1)));
                 this.getAdditonal1().add(panelImage);
             } else {
-                panelImage.add(imagesBody.setIconAditionals(String.valueOf(index + 1)));
+                panelImage.add(imagesBody.setIconAditionals(String.valueOf(i + 1)));
                 this.getAdditonal2().add(panelImage);
-                index++;
             }
 
         }
@@ -192,7 +219,8 @@ public class OrderIceCream extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e) && isEnableButtonSelect()) {
                     //Accion de elegir un helado
-                    System.out.println("Helado " + pos + " elegido");
+                    //System.out.println("Helado " + pos + " elegido");
+                    setEnableReporteButton(true);
                     if (pos > 2) {
                         getGenericIceCream().addAdditional(getAdditionalFruits().get(pos % 3));
                     } else
@@ -215,13 +243,15 @@ public class OrderIceCream extends JPanel {
 
     public void generateOrder() {
         this.setGenerateOrderButton(new JButton("Generar Pedido"));
+        this.setIconOnButton(this.getGenerateOrderButton(), "report");
         this.getBodyOder().add(this.getGenerateOrderButton());
         this.getGenerateOrderButton().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (SwingUtilities.isLeftMouseButton(e)) {
+                if (SwingUtilities.isLeftMouseButton(e) && isEnableReporteButton()) {
                     try {
                         ClientService.saveIceCreams(iceCreams);
+                        //JOptionPane.showMessageDialog(null, "Su reporte se ha generado");
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
                     }
@@ -374,5 +404,13 @@ public class OrderIceCream extends JPanel {
 
     public void setEnableButtonSelect(boolean enableButtonSelect) {
         this.enableButtonSelect = enableButtonSelect;
+    }
+
+    public boolean isEnableReporteButton() {
+        return enableReporteButton;
+    }
+
+    public void setEnableReporteButton(boolean enableReporteButton) {
+        this.enableReporteButton = enableReporteButton;
     }
 }

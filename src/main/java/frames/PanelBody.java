@@ -23,20 +23,34 @@ public class PanelBody extends JPanel {
 
     public void createBody() {
         this.body.setPreferredSize(new Dimension(this.getWidthBody(), this.getHeightBody()));
+        this.body.setBackground(new Color(201,126, 0));
+        JLabel message = new JLabel();
+        message.setPreferredSize(new Dimension(1000, 100));
+        message.setOpaque(true);
+        message.setBackground(new Color(201,126, 0));
+        message.setFont(new Font("Arial", Font.BOLD, 40));
+        message.setText("  *****BIENVENIDO A LA FÁBRICA DE HELADOS*****");
+        message.setForeground(Color.WHITE);
+        this.getBody().add(message);
         this.createBodyImages();
         this.createButtons();
-        JTextArea mensaje = new JTextArea(5, 90);
-        mensaje.setText("HOLA");
+        //JTextArea mensaje = new JTextArea(5, 90);
+        //mensaje.setText("HOLA");
         //mensaje.setSize(new Dimension(900, 300));
-        this.getBody().add(mensaje);
-        this.createTableSales();
+        //this.getBody().add(mensaje);
+        //this.createTableSales();
     }
 
     public void createButtons() {
-        JButton showIceCreams = new JButton("Lista de Helados");
         JButton orderIceCream = new JButton("Pedir Helado");
-        this.getBody().add(showIceCreams);
+        ImageIcon image = new ImageIcon("./icons/order.png");
+        Image img = image.getImage();
+        Image scaledImg = img.getScaledInstance(50, 30, Image.SCALE_SMOOTH);
+        image = new ImageIcon(scaledImg);
+        orderIceCream.setIcon(image);
+        orderIceCream.setHorizontalAlignment(SwingConstants.LEFT);;
         this.getBody().add(orderIceCream);
+
         orderIceCream.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

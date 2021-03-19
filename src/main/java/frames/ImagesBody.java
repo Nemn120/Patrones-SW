@@ -30,14 +30,40 @@ public class ImagesBody {
         Image imgScale = img.getScaledInstance(300, 300, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(imgScale);
         icon.setIcon(scaledIcon);
+        icon.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         panelImage.add(icon);
         panelImage.repaint();
         return panelImage;
     }
 
-    public PanelBody setIconAditionals(String typeOfIceCream) {
-        IceCreamMachine iceCream = IceCreamFactory.getInstance(typeOfIceCream);
-        this.setImagePath(iceCream.getImagePath());
+    public String selectTypeAditionalIcon(String codeType) {
+        switch (codeType) {
+            case "1" : {
+                return "limon";
+            }
+            case "2": {
+                return "fresa";
+            }
+            case "3": {
+                return "variado";
+            }
+            case "4": {
+                return "fresa2";
+            }
+            case "5": {
+                return "menta";
+            }
+            case "6": {
+                return "variado";
+            }
+        }
+        return null;
+    }
+
+    public PanelBody setIconAditionals(String typeAditional) {
+        typeAditional = this.selectTypeAditionalIcon(typeAditional);
+        String pathTypeAditional = ("./icons/adicionales/").concat(typeAditional).concat(".png");
+        this.setImagePath(pathTypeAditional);
         PanelBody panelImage = new PanelBody();
         JLabel icon = new JLabel();
         this.setImage(new ImageIcon(this.getImagePath()));
@@ -45,6 +71,7 @@ public class ImagesBody {
         Image imgScale = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(imgScale);
         icon.setIcon(scaledIcon);
+        icon.setBorder(BorderFactory.createLineBorder(Color.ORANGE, 2));
         panelImage.add(icon);
         panelImage.repaint();
         return panelImage;

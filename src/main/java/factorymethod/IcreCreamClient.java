@@ -48,7 +48,7 @@ public class IcreCreamClient {
 
 		JFrame frame = new JFrame("FABRICA DE HELADOS");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		PanelBody body = new PanelBody(1024, 780);
+		PanelBody body = new PanelBody(1024, 520);
 		frame.add(body.getBody(), BorderLayout.CENTER);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
