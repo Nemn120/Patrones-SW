@@ -37,6 +37,7 @@ public class OrderIceCream extends JPanel {
     private String message;
     JTextArea textMessage;
     double totalPrice;
+    private boolean enableButtonSelect;
     private IceCreams iceCreams;
     GenericIceCream genericIceCream;
     GenericAdditional genericAdditional;
@@ -49,6 +50,8 @@ public class OrderIceCream extends JPanel {
         this.totalPrice = 0;
         this.message = "";
         textMessage = new JTextArea(5, 40);
+        this.listSelectAdditional1 = new ArrayList<>();
+        this.enableButtonSelect = false;
         this.chocolateButton = new JButton();
         this.vainillaCreamButton = new JButton();
         this.fresaCreamButton = new JButton();
@@ -58,11 +61,11 @@ public class OrderIceCream extends JPanel {
     }
 
     public void OrderPanel() {
-        this.getBodyOder().setPreferredSize(new Dimension(600, 700));
+        this.getBodyOder().setPreferredSize(new Dimension(600, 750));
         this.createButtonIceCreams();
-        this.getBodyOder().add(this.getTextMessage());
-        this.showAditionals();
         this.selectIceCream();
+        this.showAditionals();
+        this.getBodyOder().add(this.getTextMessage());
         this.generateOrder();
         this.selectAditional();
         this.showTotalPrice();
@@ -91,6 +94,8 @@ public class OrderIceCream extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     iceCreamMachine[0] = IceCreamFactory.getInstance("1");
+                    getListSelectAdditional1().get(0).setEnabled(false);
+                    enableButtonSelect();
                 }
                 genericIceCream = (IcreCreamChocolate) iceCreamMachine[0];
                 System.out.println(((GenericIceCream) iceCreamMachine[0]).getFlavors());
@@ -103,6 +108,7 @@ public class OrderIceCream extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     iceCreamMachine[0] = IceCreamFactory.getInstance("2");
+                    enableButtonSelect();
                 }
                 genericIceCream = (IceCreamVainilla) iceCreamMachine[0];
                 System.out.println(((GenericIceCream) iceCreamMachine[0]).getFlavors());
@@ -115,12 +121,20 @@ public class OrderIceCream extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     iceCreamMachine[0] = IceCreamFactory.getInstance("3");
+                    enableButtonSelect();
                 }
                 System.out.println(((GenericIceCream) iceCreamMachine[0]).getFlavors());
                 genericIceCream = (IceCreamFresa) iceCreamMachine[0];
                 iceCreams.addIceCream((IceCreamFresa) iceCreamMachine[0]);
             }
         });
+    }
+
+    public void enableButtonSelect() {
+        for(int i=0; i<6; i++) {
+            this.getListSelectAdditional1().get(i).setEnabled(true);
+        }
+        this.setEnableButtonSelect(true);
     }
 
     public void showMessage() {
@@ -151,6 +165,7 @@ public class OrderIceCream extends JPanel {
             JButton selectAditional = new JButton("Elegir");
             this.getListSelectAdditional1().add(selectAditional);
             panelImage.add(this.getListSelectAdditional1().get(i));
+            this.getListSelectAdditional1().get(i).setEnabled(false);
 
             if (i < 3) {
                 panelImage.add(imagesBody.setIconAditionals(String.valueOf(i + 1)));
@@ -175,7 +190,7 @@ public class OrderIceCream extends JPanel {
         this.getListSelectAdditional1().get(pos).addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (SwingUtilities.isLeftMouseButton(e)) {
+                if (SwingUtilities.isLeftMouseButton(e) && isEnableButtonSelect()) {
                     //Accion de elegir un helado
                     System.out.println("Helado " + pos + " elegido");
                     if (pos > 2) {
@@ -351,5 +366,13 @@ public class OrderIceCream extends JPanel {
 
     public void setGenericAdditional(GenericAdditional genericAdditional) {
         this.genericAdditional = genericAdditional;
+    }
+
+    public boolean isEnableButtonSelect() {
+        return enableButtonSelect;
+    }
+
+    public void setEnableButtonSelect(boolean enableButtonSelect) {
+        this.enableButtonSelect = enableButtonSelect;
     }
 }
