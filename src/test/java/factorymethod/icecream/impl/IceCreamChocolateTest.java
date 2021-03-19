@@ -27,31 +27,10 @@ public class IceCreamChocolateTest {
     }
 
     @Test
-    public void testSetTopping() {
-
-        iceCreamChocolate.setTopping("Toppings");
-        iceCreamChocolate.prepareIceCream();
-        Assert.assertEquals("Toppings",iceCreamChocolate.getToppings());
-        Assert.assertSame("Toppings",iceCreamChocolate.getToppings());
-
-    }
-    @Test
-    public void testSetTopping2() {
-
-        iceCreamChocolate.setTopping("");
-        iceCreamChocolate.prepareIceCream();
-        Assert.assertEquals("",iceCreamChocolate.getToppings());
-        Assert.assertSame("",iceCreamChocolate.getToppings());
-
-    }
-
-    @Test
     public void testSetPrice() {
 
         iceCreamChocolate.setPrice(15.0);
         Assert.assertEquals(15.0,iceCreamChocolate.getPrice(),0.1);
 
     }
-
-
 }

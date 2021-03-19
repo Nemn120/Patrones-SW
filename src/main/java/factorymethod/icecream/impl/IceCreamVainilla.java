@@ -1,5 +1,6 @@
 package factorymethod.icecream.impl;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import factorymethod.icecream.GenericIceCream;
 import factorymethod.icecream.IceCreamMachine;
 
@@ -16,12 +17,8 @@ public class IceCreamVainilla extends GenericIceCream implements IceCreamMachine
 		this.createIceCream();
 	}
 
-	public void setTopping(String toppings) {
-		this.toppings = toppings;
-
-	}
-
 	@Override
+	@JsonIgnore
 	public String getImagePath() {
 		String path = "./icons/vainilla.png";
 		return path;

@@ -1,11 +1,8 @@
 package factorymethod.icecream.impl;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import factorymethod.icecream.GenericIceCream;
 import factorymethod.icecream.IceCreamMachine;
-import frames.ImagesBody;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class IcreCreamChocolate extends GenericIceCream implements IceCreamMachine {
 
@@ -20,11 +17,8 @@ public class IcreCreamChocolate extends GenericIceCream implements IceCreamMachi
 		this.createIceCream();
 	}
 
-	public void setTopping(String toppings) {
-		this.toppings = toppings;
-	}
-
 	@Override
+	@JsonIgnore
 	public String getImagePath() {
 		String path = "./icons/chocolate.png";
 		return path;

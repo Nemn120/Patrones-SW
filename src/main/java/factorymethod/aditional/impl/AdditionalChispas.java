@@ -6,14 +6,16 @@ import factorymethod.aditional.GenericAdditional;
 public class AdditionalChispas extends GenericAdditional implements AdditionalMachine {
 
     public AdditionalChispas() {
+        this.type = "Chispas";
     }
 
     public AdditionalChispas(String name, Double price) {
         super(name, price);
+        this.type = "Chispas";
     }
 
     @Override
     public String info() {
-        return "Precio"+price +" Chispas "+name;
+        return super.toString();
     }
 }

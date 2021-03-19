@@ -25,13 +25,4 @@ public class IceCreamVainillaTest {
         Assert.assertSame("Vainilla",iceCreamVainilla.getFlavors());
 
     }
-
-    @Test
-    public void testSetTopping() {
-
-        iceCreamVainilla.setTopping("Toppings");
-        Assert.assertEquals("Toppings",iceCreamVainilla.getToppings());
-        Assert.assertSame("Toppings",iceCreamVainilla.getToppings());
-
-    }
 }

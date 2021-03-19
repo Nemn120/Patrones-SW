@@ -27,14 +27,4 @@ public class IceCreamFresaTest {
 
     }
 
-    @Test
-    public void testSetTopping() {
-
-        iceCreamFresa.setTopping("Toppings");
-        Assert.assertEquals("Toppings",iceCreamFresa.getToppings());
-        Assert.assertSame("Toppings",iceCreamFresa.getToppings());
-
-    }
-
-
 }
