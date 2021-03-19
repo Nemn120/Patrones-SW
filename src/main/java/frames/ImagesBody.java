@@ -35,6 +35,21 @@ public class ImagesBody {
         return panelImage;
     }
 
+    public PanelBody setIconAditionals(String typeOfIceCream) {
+        IceCreamMachine iceCream = IceCreamFactory.getInstance(typeOfIceCream);
+        this.setImagePath(iceCream.getImagePath());
+        PanelBody panelImage = new PanelBody();
+        JLabel icon = new JLabel();
+        this.setImage(new ImageIcon(this.getImagePath()));
+        Image img = this.getImage().getImage();
+        Image imgScale = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        icon.setIcon(scaledIcon);
+        panelImage.add(icon);
+        panelImage.repaint();
+        return panelImage;
+    }
+
     public PanelBody getBody() {
         return body;
     }

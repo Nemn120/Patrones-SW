@@ -28,10 +28,8 @@ public class PanelBody extends JPanel {
         JTextArea mensaje = new JTextArea(5, 90);
         mensaje.setText("HOLA");
         //mensaje.setSize(new Dimension(900, 300));
-        JTextArea ventas = new JTextArea(5, 90);
-        mensaje.setText("VENTAS");
         this.getBody().add(mensaje);
-        this.getBody().add(ventas);
+        this.createTableSales();
     }
 
     public void createButtons() {
@@ -55,6 +53,11 @@ public class PanelBody extends JPanel {
         for(int i=0; i<3; i++) {
             this.getBody().add(this.imageBody.setIcon(String.valueOf(i+1)));
         }
+    }
+
+    public void createTableSales() {
+        SalesHistory salesHistory = new SalesHistory();
+        this.getBody().add(salesHistory.getSaleHistoryBody());
     }
 
     public int getWidthBody() {
