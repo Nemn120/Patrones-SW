@@ -36,14 +36,20 @@ public abstract class GenericIceCream {
 		this.additional = additional;
 	}
 
-	protected void createIceCream(){
-		System.out.println("El helado de "+flavors+" se prepara con el siguiente ingrediente: \n" + ingredientes
+	public String createIceCream(){
+		return "El helado de "+flavors+" se prepara con el siguiente ingrediente: \n" + ingredientes
 				+ (additional != null ? ("\n adicionales: " + additional.getName() + " - precio: "+additional.getPrice())
-				: " sin adicional"));
+				: " sin adicional");
 	}
 
 	public void addAdditional(GenericAdditional additional){
 		this.price+=additional.getPrice();
 		this.additional = additional;
+	}
+
+	@Override
+	public String toString() {
+		return "* sabor=" + flavors +", precio=" + price + ", adicional= " + (additional==null?"No":additional.getName())+"\n";
+
 	}
 }

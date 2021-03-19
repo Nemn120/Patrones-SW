@@ -1,13 +1,23 @@
 package frames;
 
+import factorymethod.ClientService;
+import factorymethod.aditional.GenericAdditional;
+import factorymethod.aditional.impl.AdditionalChispas;
+import factorymethod.aditional.impl.AdditionalFruits;
+import factorymethod.factory.AdditionalFactory;
 import factorymethod.factory.IceCreamFactory;
+import factorymethod.icecream.GenericIceCream;
 import factorymethod.icecream.IceCreamMachine;
+import factorymethod.icecream.IceCreams;
+import factorymethod.icecream.impl.IceCreamFresa;
+import factorymethod.icecream.impl.IceCreamVainilla;
 import factorymethod.icecream.impl.IcreCreamChocolate;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,30 +37,38 @@ public class OrderIceCream extends JPanel {
     private String message;
     JTextArea textMessage;
     double totalPrice;
+    private IceCreams iceCreams;
+    GenericIceCream genericIceCream;
+    GenericAdditional genericAdditional;
+    List<GenericAdditional> additionalChispasList;
+    List<GenericAdditional> additionalFruits;
 
     public OrderIceCream() {
         this.bodyOder = new JPanel();
         this.setLayout(new BorderLayout());
         this.totalPrice = 0;
         this.message = "";
-        textMessage = new JTextArea(5,40);
+        textMessage = new JTextArea(5, 40);
         this.chocolateButton = new JButton();
         this.vainillaCreamButton = new JButton();
         this.fresaCreamButton = new JButton();
+        this.iceCreams = new IceCreams();
+        this.additionalChispasList = ClientService.selectAdditional("1");
+        this.additionalFruits = ClientService.selectAdditional("2");
     }
 
     public void OrderPanel() {
-        this.getBodyOder().setPreferredSize(new Dimension(600,700));
+        this.getBodyOder().setPreferredSize(new Dimension(600, 700));
         this.createButtonIceCreams();
         this.getBodyOder().add(this.getTextMessage());
-        this.selectIceCream();
         this.showAditionals();
+        this.selectIceCream();
         this.generateOrder();
         this.selectAditional();
         this.showTotalPrice();
         JFrame frameOrder = new JFrame("Crear Pedido");
         frameOrder.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frameOrder.add(this.getBodyOder(),BorderLayout.CENTER);
+        frameOrder.add(this.getBodyOder(), BorderLayout.CENTER);
         frameOrder.pack();
         frameOrder.setLocationRelativeTo(null);
         frameOrder.setVisible(true);
@@ -67,34 +85,42 @@ public class OrderIceCream extends JPanel {
     }
 
     public void selectIceCream() {
-        final String[] message = new String[3];
+        final IceCreamMachine[] iceCreamMachine = new IceCreamMachine[1];
         this.getChocolateButton().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(SwingUtilities.isLeftMouseButton(e)) {
-                    message[0] = "HELADO DE CHOCLATE SELECCIONADO";
+                if (SwingUtilities.isLeftMouseButton(e)) {
+                    iceCreamMachine[0] = IceCreamFactory.getInstance("1");
                 }
+                genericIceCream = (IcreCreamChocolate) iceCreamMachine[0];
+                System.out.println(((GenericIceCream) iceCreamMachine[0]).getFlavors());
+                iceCreams.addIceCream((IcreCreamChocolate) iceCreamMachine[0]);
             }
         });
-        this.setMessage(message[0]);
+
         this.getVainillaCreamButton().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(SwingUtilities.isLeftMouseButton(e)) {
-                    message[1] = "HELADO DE VAINILLA SELECCIONADO";
+                if (SwingUtilities.isLeftMouseButton(e)) {
+                    iceCreamMachine[0] = IceCreamFactory.getInstance("2");
                 }
+                genericIceCream = (IceCreamVainilla) iceCreamMachine[0];
+                System.out.println(((GenericIceCream) iceCreamMachine[0]).getFlavors());
+                iceCreams.addIceCream((IceCreamVainilla) iceCreamMachine[0]);
             }
         });
-        this.setMessage(message[1]);
-        this.getChocolateButton().addMouseListener(new MouseAdapter() {
+
+        this.getFresaCreamButton().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(SwingUtilities.isLeftMouseButton(e)) {
-                    message[2] = "HELADO DE FRESA SELECCIONADO";
+                if (SwingUtilities.isLeftMouseButton(e)) {
+                    iceCreamMachine[0] = IceCreamFactory.getInstance("3");
                 }
+                System.out.println(((GenericIceCream) iceCreamMachine[0]).getFlavors());
+                genericIceCream = (IceCreamFresa) iceCreamMachine[0];
+                iceCreams.addIceCream((IceCreamFresa) iceCreamMachine[0]);
             }
         });
-        this.setMessage(message[2]);
     }
 
     public void showMessage() {
@@ -120,17 +146,17 @@ public class OrderIceCream extends JPanel {
         this.setListSelectAdditional1(new ArrayList<>());
         int totalAditionals = 6;
         int index = 0;
-        for(int i=0; i<totalAditionals; i++) {
+        for (int i = 0; i < totalAditionals; i++) {
             JPanel panelImage = new JPanel();
             JButton selectAditional = new JButton("Elegir");
             this.getListSelectAdditional1().add(selectAditional);
             panelImage.add(this.getListSelectAdditional1().get(i));
 
-            if(i<3) {
-                panelImage.add(imagesBody.setIconAditionals(String.valueOf(i+1)));
+            if (i < 3) {
+                panelImage.add(imagesBody.setIconAditionals(String.valueOf(i + 1)));
                 this.getAdditonal1().add(panelImage);
             } else {
-                panelImage.add(imagesBody.setIconAditionals(String.valueOf(index+1)));
+                panelImage.add(imagesBody.setIconAditionals(String.valueOf(index + 1)));
                 this.getAdditonal2().add(panelImage);
                 index++;
             }
@@ -140,7 +166,7 @@ public class OrderIceCream extends JPanel {
 
     public void selectAditional() {
         int totalAditionals = 6;
-        for(int i=0; i<totalAditionals; i++) {
+        for (int i = 0; i < totalAditionals; i++) {
             this.addAditional(i);
         }
     }
@@ -149,9 +175,15 @@ public class OrderIceCream extends JPanel {
         this.getListSelectAdditional1().get(pos).addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(SwingUtilities.isLeftMouseButton(e)) {
+                if (SwingUtilities.isLeftMouseButton(e)) {
                     //Accion de elegir un helado
                     System.out.println("Helado " + pos + " elegido");
+                    if (pos > 2) {
+                        getGenericIceCream().addAdditional(getAdditionalFruits().get(pos % 3));
+                    } else
+                        getGenericIceCream().addAdditional(getAdditionalChispasList().get(pos));
+
+                    textMessage.append(getGenericIceCream().toString());
                 }
             }
         });
@@ -169,8 +201,20 @@ public class OrderIceCream extends JPanel {
     public void generateOrder() {
         this.setGenerateOrderButton(new JButton("Generar Pedido"));
         this.getBodyOder().add(this.getGenerateOrderButton());
-    }
+        this.getGenerateOrderButton().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (SwingUtilities.isLeftMouseButton(e)) {
+                    try {
+                        ClientService.saveIceCreams(iceCreams);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                }
+            }
+        });
 
+    }
 
 
     public JPanel getBodyOder() {
@@ -267,5 +311,45 @@ public class OrderIceCream extends JPanel {
 
     public void setTextMessage(JTextArea textMessage) {
         this.textMessage = textMessage;
+    }
+
+    public List<GenericAdditional> getAdditionalChispasList() {
+        return additionalChispasList;
+    }
+
+    public void setAdditionalChispasList(List<GenericAdditional> additionalChispasList) {
+        this.additionalChispasList = additionalChispasList;
+    }
+
+    public List<GenericAdditional> getAdditionalFruits() {
+        return additionalFruits;
+    }
+
+    public void setAdditionalFruits(List<GenericAdditional> additionalFruits) {
+        this.additionalFruits = additionalFruits;
+    }
+
+    public IceCreams getIceCreams() {
+        return iceCreams;
+    }
+
+    public void setIceCreams(IceCreams iceCreams) {
+        this.iceCreams = iceCreams;
+    }
+
+    public GenericIceCream getGenericIceCream() {
+        return genericIceCream;
+    }
+
+    public void setGenericIceCream(GenericIceCream genericIceCream) {
+        this.genericIceCream = genericIceCream;
+    }
+
+    public GenericAdditional getGenericAdditional() {
+        return genericAdditional;
+    }
+
+    public void setGenericAdditional(GenericAdditional genericAdditional) {
+        this.genericAdditional = genericAdditional;
     }
 }

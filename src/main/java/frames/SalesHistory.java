@@ -1,6 +1,5 @@
 package frames;
 
-import org.json.JSONObject;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -23,13 +22,13 @@ public class SalesHistory extends JTable {
         this.barras = new JScrollPane(tableSalesHistory);
         this.modelo = new DefaultTableModel();
         this.tableSalesHistory = new JTable(modelo);
-        this.addColumns();
+     //   this.addColumns();
         this.getTableSalesHistory().setModel(this.getModelo());
         this.addInformation();
         this.getTableSalesHistory().setPreferredSize(new Dimension(500, 100));
     }
 
-    public void addColumns() {
+  /*  public void addColumns() {
         JSONObject model = new JSONObject();
         model.put("Nombre", "Victor");
         model.put("Apellido", "Benavente");
@@ -44,6 +43,8 @@ public class SalesHistory extends JTable {
         }
         this.getModelo().setColumnIdentifiers(this.getColumnas());
     }
+
+   */
 
 
     public void addInformation() {

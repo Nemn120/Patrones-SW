@@ -2,14 +2,13 @@ package factorymethod;
 
 import factorymethod.aditional.GenericAdditional;
 import factorymethod.factory.AdditionalFactory;
+import factorymethod.icecream.GenericIceCream;
+import factorymethod.icecream.IceCreamMachine;
 import factorymethod.icecream.IceCreams;
 import util.ObjectMapperJSON;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class ClientService {
 
@@ -38,5 +37,19 @@ public class ClientService {
             String path = "src/main/resources/IceCreams/" + uuid + ".json";
             objectMapperJSON.writeObject(path, iceCreams);
         }
+    }
+
+    private static void additionalInfo(Scanner scanner, IceCreamMachine iceCream) {
+        String topping = "";
+        System.out.println("\n Ingrese adicional 1: Frutas  - 2: Chispas");
+        topping = scanner.nextLine();
+
+        List<GenericAdditional> additionals = ClientService.selectAdditional(topping);
+        System.out.println("\n Seleccione un adicional");
+        additionals.forEach(x -> System.out.println(x.toString()));
+        topping = scanner.nextLine();
+
+        ((GenericIceCream) iceCream).addAdditional(additionals.get(Integer.parseInt(topping) - 1));
+
     }
 }

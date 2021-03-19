@@ -18,7 +18,7 @@ import factorymethod.icecream.IceCreams;
 public class IcreCreamClient {
 
     public static void main(String[] args) throws IOException {
-
+/*
         String type="";
         IceCreams iceCreams = new IceCreams();
         Scanner scanner = new Scanner(System.in);
@@ -44,7 +44,8 @@ public class IcreCreamClient {
         System.out.println("\nGracias por su compra ");
 
         System.out.println(iceCreams.toString());
-        /*
+        */
+
 		JFrame frame = new JFrame("FABRICA DE HELADOS");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		PanelBody body = new PanelBody(1024, 780);
@@ -52,24 +53,7 @@ public class IcreCreamClient {
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
-*/
-    }
-
-    private static void additionalInfo(Scanner scanner, IceCreamMachine iceCream) {
-        String topping = "";
-        System.out.println("\n Ingrese adicional 1: Frutas  - 2: Chispas");
-        topping = scanner.nextLine();
-
-        List<GenericAdditional> additionals = ClientService.selectAdditional(topping);
-        System.out.println("\n Seleccione un adicional");
-        additionals.forEach(x -> System.out.println(x.toString()));
-        topping = scanner.nextLine();
-
-        ((GenericIceCream) iceCream).addAdditional(additionals.get(Integer.parseInt(topping) - 1));
 
     }
-
-
-
 
 }
