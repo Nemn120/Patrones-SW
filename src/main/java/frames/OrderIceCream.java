@@ -251,7 +251,7 @@ public class OrderIceCream extends JPanel {
                 if (SwingUtilities.isLeftMouseButton(e) && isEnableReporteButton()) {
                     try {
                         ClientService.saveIceCreams(iceCreams);
-                        //JOptionPane.showMessageDialog(null, "Su reporte se ha generado");
+                        JOptionPane.showMessageDialog(null, "Su reporte se ha generado");
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
                     }
