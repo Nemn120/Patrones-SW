@@ -45,11 +45,14 @@ public class OrderIceCream extends JPanel {
     List<GenericAdditional> additionalChispasList;
     List<GenericAdditional> additionalFruits;
     private boolean enableReporteButton;
+    JFrame frameOrder;
 
     public OrderIceCream() {
         this.bodyOder = new JPanel();
         this.setLayout(new BorderLayout());
-        this.bodyOder.setBackground(new Color(201	, 126, 0));
+        //this.bodyOder.setBackground(new Color(255,254,232));
+
+        this.bodyOder.setBackground(new Color(231,239,232));
         this.totalPrice = 0;
         this.message = "";
         textMessage = new JTextArea(5, 40);
@@ -66,7 +69,7 @@ public class OrderIceCream extends JPanel {
     }
 
     public void OrderPanel() {
-        this.getBodyOder().setPreferredSize(new Dimension(600, 750));
+        this.getBodyOder().setPreferredSize(new Dimension(500, 750));
         this.createButtonIceCreams();
         this.selectIceCream();
         this.showAditionals();
@@ -74,7 +77,7 @@ public class OrderIceCream extends JPanel {
         this.generateOrder();
         this.selectAditional();
         //this.showTotalPrice();
-        JFrame frameOrder = new JFrame("Crear Pedido");
+        frameOrder = new JFrame("Crear Pedido");
         frameOrder.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frameOrder.add(this.getBodyOder(), BorderLayout.CENTER);
         frameOrder.pack();
@@ -169,13 +172,15 @@ public class OrderIceCream extends JPanel {
     public void showAditionals() {
         this.setAdditonal1(new JPanel());
         this.getAdditonal1().setPreferredSize(new Dimension(500, 280));
-        this.getAdditonal1().setBackground(new Color(201	, 126, 0));
+        this.getAdditonal1().setBackground(new Color(255,254,232));
+        //this.bodyOder.setBackground(new Color(255,254,232));
+
         this.getAdditonal1().setBorder(BorderFactory.createLineBorder(Color.WHITE));
         this.getBodyOder().add(this.getAdditonal1());
 
         this.setAdditonal2(new JPanel());
         this.getAdditonal2().setPreferredSize(new Dimension(500, 280));
-        this.getAdditonal2().setBackground(new Color(201	, 126, 0));
+        this.getAdditonal2().setBackground(new Color(255,254,232));
         this.getAdditonal2().setBorder(BorderFactory.createLineBorder(Color.WHITE));
         this.getBodyOder().add(this.getAdditonal2());
 
@@ -192,7 +197,7 @@ public class OrderIceCream extends JPanel {
             this.setIconOnButton(selectAditional, "selectIcon");
             this.getListSelectAdditional1().add(selectAditional);
             panelImage.add(this.getListSelectAdditional1().get(i));
-            panelImage.setBackground(new Color(201,126, 0));
+            panelImage.setBackground(new Color(255,255, 255));
             this.getListSelectAdditional1().get(i).setEnabled(false);
 
             if (i < 3) {
@@ -225,7 +230,7 @@ public class OrderIceCream extends JPanel {
                         getGenericIceCream().addAdditional(getAdditionalFruits().get(pos % 3));
                     } else
                         getGenericIceCream().addAdditional(getAdditionalChispasList().get(pos));
-
+                    System.out.println(getGenericIceCream().toString());
                     textMessage.append(getGenericIceCream().toString());
                 }
             }
@@ -251,7 +256,9 @@ public class OrderIceCream extends JPanel {
                 if (SwingUtilities.isLeftMouseButton(e) && isEnableReporteButton()) {
                     try {
                         ClientService.saveIceCreams(iceCreams);
+                        System.out.println("Generando reporte");
                         JOptionPane.showMessageDialog(null, "Su reporte se ha generado");
+                        frameOrder.setVisible(false);
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
                     }

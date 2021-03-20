@@ -23,14 +23,14 @@ public class PanelBody extends JPanel {
 
     public void createBody() {
         this.body.setPreferredSize(new Dimension(this.getWidthBody(), this.getHeightBody()));
-        this.body.setBackground(new Color(201,126, 0));
+        this.body.setBackground(new Color(231,239,232));
         JLabel message = new JLabel();
         message.setPreferredSize(new Dimension(1000, 100));
         message.setOpaque(true);
-        message.setBackground(new Color(201,126, 0));
+        message.setBackground(new Color(231,239,232));
         message.setFont(new Font("Arial", Font.BOLD, 40));
         message.setText("  *****BIENVENIDO A LA FÁBRICA DE HELADOS*****");
-        message.setForeground(Color.WHITE);
+        message.setForeground(Color.DARK_GRAY);
         this.getBody().add(message);
         this.createBodyImages();
         this.createButtons();

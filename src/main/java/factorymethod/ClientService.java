@@ -38,18 +38,4 @@ public class ClientService {
             objectMapperJSON.writeObject(path, iceCreams);
         }
     }
-
-    private static void additionalInfo(Scanner scanner, IceCreamMachine iceCream) {
-        String topping = "";
-        System.out.println("\n Ingrese adicional 1: Frutas  - 2: Chispas");
-        topping = scanner.nextLine();
-
-        List<GenericAdditional> additionals = ClientService.selectAdditional(topping);
-        System.out.println("\n Seleccione un adicional");
-        additionals.forEach(x -> System.out.println(x.toString()));
-        topping = scanner.nextLine();
-
-        ((GenericIceCream) iceCream).addAdditional(additionals.get(Integer.parseInt(topping) - 1));
-
-    }
 }
